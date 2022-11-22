@@ -1,10 +1,11 @@
 import ButtonModel from './ButtonModel';
+import InputModel from './InputModel';
 
 class ControlModel {
-  input: React.InputHTMLAttributes<HTMLInputElement>;
+  input: InputModel;
   buttons: Record<'left' | 'right', ButtonModel[]>;
 
-  constructor(input: React.InputHTMLAttributes<HTMLInputElement>, buttons: Record<'left' | 'right', ButtonModel[]> = { right: [], left: [] }) {
+  constructor(input: InputModel, buttons: Record<'left' | 'right', ButtonModel[]> = { right: [], left: [] }) {
     this.input = input;
     this.buttons = buttons;
   }

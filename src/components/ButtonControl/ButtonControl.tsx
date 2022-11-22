@@ -1,20 +1,35 @@
+import { observer } from 'mobx-react';
+import { FC, useEffect, useState } from 'react';
+
 import buttonsControlStore from '../../stores/buttonsControlStore';
+import InputStore from '../../stores/inputStore';
 import ButtonsGroup from '../ButtonsGroup';
 import { Input } from '../Input/Input';
 
-const ButtonControl = () => {
-  const { getControlById } = buttonsControlStore;
-  const currentControl = getControlById('');
-  const { input, buttons } = currentControl ?? {};
-
-  return (<>{currentControl && input && buttons &&
-      <>
-        <ButtonsGroup {...buttons?.left ?? []} />
-        <Input value={`${input.value}`} onChange={input.onChange} />
-        <ButtonsGroup {...buttons?.right ?? []} />
-      </>
-    }
-  </>)
+type Props = {
+  id: string;
 }
 
-export { ButtonControl };
+const ButtonControl: FC<Props> = observer(({ id }) => {
+  const { getControlById } = buttonsControlStore;
+  const currentControl = getControlById(id);
+  const { input, buttons } = currentControl ?? {};
+  const { value, onChange } = input ?? {};
+  const { left: leftButtons, right: rightButtons } = buttons ?? {};
+
+  const [inputStore, setInputStore] = useState<InputStore>();
+  useEffect(() => {
+    setInputStore(new InputStore());
+  }, []);
+
+  return (<>{inputStore && currentControl && input && buttons &&
+      <div>
+        <ButtonsGroup {...{ buttons: leftButtons ?? [], ctx: inputStore }} />
+        <Input id={input.id} value={inputStore.value} onChange={onChange && onChange(inputStore)} />
+        <ButtonsGroup {...{ buttons: rightButtons ?? [], ctx: inputStore }} />
+      </div>
+    }
+  </>)
+})
+
+export default ButtonControl;
