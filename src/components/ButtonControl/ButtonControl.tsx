@@ -14,7 +14,7 @@ const ButtonControl: FC<Props> = observer(({ id }) => {
   const { getControlById } = buttonsControlStore;
   const currentControl = getControlById(id);
   const { input, buttons } = currentControl ?? {};
-  const { value, onChange } = input ?? {};
+  const { onChange } = input ?? {};
   const { left: leftButtons, right: rightButtons } = buttons ?? {};
 
   const [inputStore, setInputStore] = useState<InputStore>();

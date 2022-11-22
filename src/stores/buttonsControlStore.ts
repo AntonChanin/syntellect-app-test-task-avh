@@ -1,12 +1,12 @@
 import { action, makeObservable, observable } from 'mobx';
 
-import { ControlModel } from '../models/ControlModel';
-import ConstrolsService from './getControls.service';
+import { ButtonControlModel } from '../models/ButtonControlModel';
+import getControlsService from './getControls.service';
 
 class ButtonsControlStore {
-  controls: ControlModel[] = [];
+  controls: ButtonControlModel[] = [];
 
-  constructor(controls: ControlModel[] = []) {
+  constructor(controls: ButtonControlModel[] = []) {
     this.controls = controls;
 
     makeObservable(this, {
@@ -17,7 +17,7 @@ class ButtonsControlStore {
   }
 
   initStore() {
-    this.controls = ConstrolsService.getConstrolsService();
+    this.controls = getControlsService.getButtonConstrolsService();
   }
 
   getControlById(id: string) {

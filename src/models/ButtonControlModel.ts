@@ -1,7 +1,7 @@
 import ButtonModel from './ButtonModel';
 import InputModel from './InputModel';
 
-class ControlModel {
+class ButtonControlModel {
   input: InputModel;
   buttons: Record<'left' | 'right', ButtonModel[]>;
 
@@ -11,4 +11,4 @@ class ControlModel {
   }
 }
 
-export { ControlModel };
+export { ButtonControlModel };

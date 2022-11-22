@@ -1,8 +1,9 @@
-import { ControlModel } from '../models/ControlModel';
+import { AutocompliteControlModel } from '../models/AutocompliteControlModel';
+import { ButtonControlModel } from '../models/ButtonControlModel';
 
-class ConstrolsService {
+class ControlsService {
 
-  getConstrolsService = (): ControlModel[] => {
+  getButtonConstrolsService = (): ButtonControlModel[] => {
     return [{
       input: {
         id: '1',
@@ -49,6 +50,20 @@ class ConstrolsService {
       }
     }];
   }
+
+  getAutocompliteConstrolsService = (): Record<string, AutocompliteControlModel> => {
+    return {
+      first: {
+        input: {
+          id: 'first',
+          value: '',
+          onChange: (ctx) => (value) => { ctx.setValue(value); },
+        },
+        hints: [],
+        maxHint: 3,
+      }
+    }
+  }
 }
 
-export default new ConstrolsService();
+export default new ControlsService();
